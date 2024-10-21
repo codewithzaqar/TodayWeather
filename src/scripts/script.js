@@ -65,7 +65,7 @@ function storage(state, title, url) {
 		}
 		else {
 			//retourne des sites de base pour faire beau
-			return [["Youtube", "https://youtube.com"], ["Wikipedia", "https://Wikipedia.org"], ["Startpage", "https://www.startpage.com"], ["Reddit", "https://reddit.com"], ["victor-azevedo.me", "https://victor-azevedo.me"]];
+			return [["Youtube", "https://youtube.com"], ["Wikipedia", "https://Wikipedia.org"], ["Startpage", "https://www.startpage.com/"], ["Reddit", "https://reddit.com"], ["victor-azevedo.me", "https://victor-azevedo.me"]];
 		}
 		
 	}
@@ -96,9 +96,9 @@ function appendblock(title, url, index) {
 		return a.hostname;
 	}
 
-	var bestIconUrl  = "https://besticon-demo.herokuapp.com/icon?url=" + getdomainroot(url) + "&size=80..120..200";
+	var bestIconUrl = "https://besticon-demo.herokuapp.com/icon?url=" + getdomainroot(url) + "&size=80..120..200";
 
-	var b = "<div class='block'><a href='" + url + "'><img class='l_icon' src='" + bestIconUrl + "'><p>" + title + "</p></a><button class='remove'><img src='src/images/x.png'></button><div>";
+	var b = "<div class='block'><a href='" + url + "'><img class='l_icon' src='" + bestIconUrl + "'><p>" + title + "</p></a><button class='remove'><img src='src/images/x.png'</button><div>";
 
 	$(".linkblocks").append(b);
 }
@@ -218,7 +218,9 @@ function date() {
 	var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 	//la date defini l'index dans la liste des jours et mois pour l'afficher en toute lettres
-	$(".date span").text(days[d.getDay()] + " " + d.getDate() + " " + months[d.getMonth()]);
+	$(".date .jour").text(days[d.getDay()]);
+	$(".date .chiffre").text(d.getDate());
+	$(".date .mois").text(months[d.getMonth()]);
 }
 
 
@@ -234,10 +236,11 @@ function date() {
 
 
 
-function weather() {
+function weather(changelang) {
 
 	//init la meteo avant que l'api charge
 	var l = localStorage.wLastState;
+	var lang = (changelang ? changelang : localStorage.lang);
 	(l ? dataHandling(JSON.parse(l)) : "");
 
 
@@ -296,11 +299,9 @@ function weather() {
 
 
 		//pour la description et temperature
-
-		var desc = '<span>' + data.weather[0].description + '</span>. It is <span class="w_temp"></span> currently.'
-		$(".w_description").html(desc);
-		$(".w_temp").text(Math.floor(data.main.temp) + '°');
-		
+		$(".w_desc_meteo").text(data.weather[0].description + ". ");
+		$(".w_desc_temp").text(Math.floor(data.main.temp) + '° ');
+	
 
 		//pour l'icone
 		var d_n = dayOrNight(data.sys.sunset, data.sys.sunrise);
@@ -328,8 +329,8 @@ function weather() {
 			+ unit
 			+ '&appid='
 			+ api
-			/*+ '&lang='
-			+ navigator.language, true*/);
+			+ '&lang='
+			+ lang, true);
 
 		request_w.onload = function() {
 			
@@ -441,7 +442,7 @@ function initBackground() {
 		//si c'est en base64 (donc custom)
 		if (ls.startsWith("data")) {
 			$('.change_background .bg_preview').attr("src", ls);
-			$('.change_background .bg_preview').css("visibility", "visible")
+			$('.change_background .bg_preview').css("visibility", "visible");
 		}
 
 
@@ -450,7 +451,7 @@ function initBackground() {
 		bg_blur(localStorage.background_blur);
 		
 	} else {
-		$('.change_background .bg_preview').css("visibility", "visible")
+		$('.change_background .bg_preview').css("visibility", "visible");
 		$('.change_background .bg_preview').attr("src", "src/images/background.jpg");
 		$('.background').css("background-image", 'url("src/images/background.jpg")');
 	}
@@ -471,7 +472,7 @@ $(".change_background input[name='background_blur']").change(function() {
 
 //affiche les settings (temporaire)
 $(".showSettings button").click(function() {
-	$(this).toggleClass("shown")
+	$(this).toggleClass("shown");
 	$(".settings").toggleClass("shown");
 	$(".interface").toggleClass("pushed");
 });
@@ -497,7 +498,8 @@ $(".imgpreview img").click(function() {
 
 
 	$(".imgpreview").removeClass("selected");
-	th = $(this)[0].parentElement.setAttribute("class", "imgpreview selected")
+	th = $(this)[0].parentElement.setAttribute("class", "imgpreview selected");
+
 	var source = this.attributes.src.value;
 	$(".background").css("background-image", "url('" + source + "')");
 	localStorage.background = source;
@@ -508,15 +510,39 @@ $(".imgpreview img").click(function() {
 
 
 
+// Signature aléatoire
+function signature() {
+	var v = "<a href='https://victor-azevedo.me/'>Zaqar Hakobyan</a>";
+	var t = "<a href='https://tahoe.be'>Tahoe Beetschen</a>";
 
-// Signature aleatoire
-$(document).ready(function() {
-	var quotes = new Array("<p>Made in Armenia with ❤<br> by Zaqar Hakobyan</p>")
-	var randno = Math.floor(Math.random()*(quotes.length));
-	$('.signature').append(quotes[randno]);
-	console.log(randno)
-})
+    var r = Math.floor(Math.random() * 2);
 
+    if (r % 2 === 0) {
+    	$('.signature .rand').append(v + " & " + t);
+	} else {
+		$('.signature .rand').append(t + " & " + v);
+	}
+}
+	
+
+
+function traduction() {
+	var translator = $('body').translate({lang: "en", t: dict});
+	
+	//init
+	translator.lang(localStorage.lang);
+	$(".lang").value = localStorage.lang;
+
+
+	//selection de langue
+	//localStorage + weather update + body trad
+	$(".lang").change(function() {
+		
+		localStorage.lang = this.value;
+		translator.lang(this.value);
+		weather(this.value);
+	});
+}
 
 
 
@@ -529,4 +555,6 @@ $(document).ready(function() {
 	date();
 	clock();
 	greetings();
+	signature();
+	traduction();
 });
