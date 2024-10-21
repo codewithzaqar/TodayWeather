@@ -510,19 +510,11 @@ $(".imgpreview img").click(function() {
 
 
 
-// Signature aléatoire
-function signature() {
-	var v = "<a href='https://victor-azevedo.me/'>Zaqar Hakobyan</a>";
-	var t = "<a href='https://tahoe.be'>Tahoe Beetschen</a>";
 
-    var r = Math.floor(Math.random() * 2);
 
-    if (r % 2 === 0) {
-    	$('.signature .rand').append(v + " & " + t);
-	} else {
-		$('.signature .rand').append(t + " & " + v);
-	}
-}
+
+
+
 	
 
 
