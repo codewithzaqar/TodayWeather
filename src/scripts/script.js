@@ -509,7 +509,13 @@ $(".imgpreview img").click(function() {
 
 
 
-
+// Signature aleatoire
+$(document).ready(function() {
+	var quotes = new Array("<p>Made in Armenia with ❤<br> by Zaqar Hakobyan</p>")
+	var randno = Math.floor(Math.random()*(quotes.length));
+	$('.signature').append(quotes[randno]);
+	console.log(randno)
+})
 
 
 
