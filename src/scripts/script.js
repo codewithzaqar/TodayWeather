@@ -395,6 +395,11 @@ function weather(changelang) {
 
 	//affiche la ville dans l'input de ville
 	$(".change_weather input[name='city']").val(localStorage.wCity);
+
+	//check imperial
+	if (localStorage.wUnit === "imperial") {
+		$(".switch input").checked = true;
+	}
 }
 
 
@@ -510,11 +515,19 @@ $(".imgpreview img").click(function() {
 
 
 
+// Signature aléatoire
+function signature() {
+	var v = "<a href='https://victor-azevedo.me/'>Victor Azevedo</a>";
+	var t = "<a href='https://tahoe.be'>Tahoe Beetschen</a>";
 
+    var r = Math.floor(Math.random() * 2);
 
-
-
-
+    if (r % 2 === 0) {
+    	$('.signature .rand').append(v + " & " + t);
+	} else {
+		$('.signature .rand').append(t + " & " + v);
+	}
+}
 	
 
 
