@@ -343,7 +343,7 @@ function weather(changelang) {
 		//pour la description et temperature
 		$(".w_desc_meteo").text(data.weather[0].description + ". ");
 		$(".w_desc_temp").text(Math.floor(data.main.temp) + '° ');
-	
+		$(".w_desc_temp_max").text(Math.floor(data.main.temp_max) + '° ')
 
 		//pour l'icone
 		var d_n = dayOrNight(data.sys.sunset, data.sys.sunrise);
