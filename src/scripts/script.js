@@ -129,29 +129,59 @@ function initblocks() {
 //affiche le bouton pour suppr le link
 function showRemoveLink() {
 
+	//envoie l'url du a dans un href temporaire
+	//ou inversement
+	function hrefHandling(state) {
+		$(".block a").each(function() {
+			
+			if (state === "disable") {
+				var h = $(this).attr("href");
+				$(this).attr("hreftemp", h);
+				$(this).removeAttr("href");
+			}
+			if (state === "enable") {
+				var h = $(this).attr("hreftemp");
+				$(this).attr("href", h);
+				$(this).removeAttr("hreftemp");
+			}
+		});
+	}
 
 	var remTimeout;
 	var canRemove = false;
 
+
 	//utilise on pour le dom rajouté après le document.load
-	$(".linkblocks").on("mouseenter", ".block", function(e) {
-		
+	//si la souris appuie sur un block
+	$(".linkblocks").on("mousedown", ".block", function(e) {
+
+		//enleve le href, rejoute les classes
+		//focus linkblocks et active le remove
 		remTimeout = setTimeout(function() {
-			
-			var block = e.currentTarget;
-			$(block).find(".remove").addClass("visible");
+
+			hrefHandling("disable");
+
+			$(".block").find(".remove").addClass("visible");
+			$(".block").addClass("wiggly");
+			$(".linkblocks").focus();
 
 			canRemove = true;
 
 		}, 1000);
 	});
 
-	$(".linkblocks").on("mouseleave", ".block", function(e) {
+	//si linkblocks perd le focus
+	$(".linkblocks").on("focusout", ".block", function(e) {
 
+		//enleve le timeout si <1000ms
+		//rajoute le href, enleve les classes
+		//désactive le remove
 		clearTimeout(remTimeout);
 
-		var block = e.currentTarget;
-		$(block).find(".remove").removeClass("visible");
+		hrefHandling("enable");
+
+		$(".block").find(".remove").removeClass("visible");
+		$(".block").removeClass("wiggly");
 
 		canRemove = false;
 	});
@@ -168,7 +198,7 @@ function showRemoveLink() {
 		setTimeout(function() {
 			$(block).remove();
 		}, 200);
-
+		
 		
 		//coupe en 2 et concat sans le link a remove
 		function ejectIntruder(arr) {
@@ -215,24 +245,24 @@ function linkSubmission() {
 
 	$(".addlink input[name='title'").val("");
 	$(".addlink input[name='url'").val("");
-};
+}
 
 $('.addlink input[name="url"]').on('keypress', function(e) {
 
-	if(e.which === 13){
-		//disable
-		$(this).attr("disabled", "disabled");
+		if(e.which === 13){
+			//disable
+			$(this).attr("disabled", "disabled");
 
-		linkSubmission()
-
-		//reenable
-		$(this).removeAttr("disabled")
-	}
-})
+			linkSubmission();
+			
+			//reenable
+			$(this).removeAttr("disabled");
+		}
+	});
 
 $(".submitlink").click(function() {
-	linkSubmission()
-})
+	linkSubmission();
+});
 
 
 
@@ -395,12 +425,23 @@ function weather(changelang) {
 		city.blur();
 	}
 
-
+	
 	$(".submitw_city").click(function() {
-		updateWeatherCity()
+		updateWeatherCity();
 	});
 
-	$('.change_weather')
+	$('.change_weather input[name="city"]').on('keypress', function(e) {
+
+		if(e.which === 13){
+			//disable
+			$(this).attr("disabled", "disabled");
+
+			updateWeatherCity();
+			
+			//reenable
+			$(this).removeAttr("disabled");
+		}
+	});
 
 
 	//req la meteo avec metric et l'enregistre
@@ -435,10 +476,10 @@ function weather(changelang) {
 	}
 
 	//affiche la ville dans l'input de ville
-	$(".change_weather input[name='city']").val(localStorage.wCity);
+	$(".change_weather input[name='city']").attr("placeholder", localStorage.wCity);
 
 	//check imperial
-	if (localStorage.wUnit === "imperial") {
+	if (u && u === "imperial") {
 		$(".switch input").checked = true;
 	}
 }
@@ -470,8 +511,8 @@ function renderImage(file) {
 $(".change_background input[name='background_file']").change(function() {
 
 	renderImage(this.files[0]);
-	console.log(this.files)
-}); 
+	console.log(this.files);
+});
 
 
 
