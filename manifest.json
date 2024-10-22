@@ -1,14 +1,31 @@
-{
-	"manifest_version": 3,
-	"name": "Barev",
-	"version": "1.0",
+"manifest_version": 2,
+"name": "Bonjourr Startpage",
+"version": "1.0",
+"description": "Bonjourr is a customizable startpage for the new tabs and windows of your browser. It's inspired by the looks of iOS and is meant to be both beautiful and practical.",
+"author": "Victor Azevedo and Tahoe Beetschen",
+"icons": {
+	"120": "favicon.png",
+  },
 
-	"description": "Welcomes you, informs you about the weather and lets you add links to quickly access your favorite websites.",
-	"icons": {
-		"120": "favicon.png"
+  "background": {
+	"scripts": ["src/scripts/jquery-3.4.1.min.js", "script.js"],
+	"page": "index.html"
+  },
+
+  "browser_action": {
+	"default_icon": {
+	  "120": "favicon.png"
 	},
+	"default_title": "Bonjourr Startpage",
+ },
 
-	"chrome_url_overrides" : {
-		"newtab": "index.html"
-	}
+"permissions": [
+	"tabs",
+	"activeTab",
+	"storage"
+  ],
+
+"chrome_url_overrides" : {
+	"newtab": "index.html"
+}
 }
