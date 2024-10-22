@@ -36,9 +36,9 @@
 	width: 40px;
 }
 
-.showSettings button img, .w_icon {
+ .showSettings button img, .w_icon {
 	filter: drop-shadow(0px 1px 15px rgba(0, 0, 0, 0.5));
-}
+ }
 
 
 
@@ -67,8 +67,8 @@
 hr {
 	border: none;
 	border-bottom: 1px solid #c8c7cc;
-	margin-top: .5em;
-	margin-bottom: .5em;
+	margin-top: .75em;
+	margin-bottom: .75em;
 	margin-right: -1.3em;
 	display: block;
 }
@@ -105,10 +105,10 @@ h1 {
 .span {
 	display: block;
 	font-size: 0.9em;
-	padding-bottom: .5em;		
+	padding-bottom: .5em;	
 }
 
-.units .span, .dynamic_bg .span, .activate_searchbar .span {
+.units .span, .dynamic_bg .span, .activate_searchbar .span  {
 	padding-top: .5em;
 }
 
@@ -283,15 +283,19 @@ input[name="city"] {
 	background-color: #e3e3e5;
 	height: 2.35em;
 	padding-left: .5em;
+}
+
+input[name="title"],
+input[name="url"] {
 	margin-bottom: .5em;
 }
 
-input[name="title"] {
+input[name="title"], input[name="url"] {
 	width: calc(100% - .5em);
 }
 
-input[name="url"] {
-	width: calc(100% - .5em);
+input[name="city"] {
+	width: 65%;
 }
 
 .addlink button {
@@ -301,9 +305,9 @@ input[name="url"] {
 }
 
 ::placeholder {
-	color: #7c7c7c;
+	color: #7c7d7e;
 	opacity: 1;
-	transform: capitalize;
+	text-transform: capitalize;
 }
 
 button {
@@ -377,6 +381,7 @@ input:checked + .slider:before {
 	padding-right: .5em;
 	padding-left: .5em;
 	margin-top: 5em;
+	padding-bottom: 3em;
 	text-align: center;
 	position: relative;
 	bottom: 10px;
@@ -398,6 +403,10 @@ input:checked + .slider:before {
 
 
 /*Dark mode*/
+
+body.dark .background {
+	filter: brightness(80%)!important;
+}
 
 body.dark .settings {
 	background-color: black;
@@ -453,8 +462,8 @@ body.dark .slider {
 	background-color: #39383d;
 }
 
-body.dark input:checked {
-	background-color: #79685d;
+body.dark input:checked + .slider {
+	background-color: #4bd663;
 }
 
 body.dark .signature {
