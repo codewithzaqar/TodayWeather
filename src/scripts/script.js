@@ -99,7 +99,7 @@ function appendblock(title, url, index) {
 	var bestIconUrl = "https://besticon-demo.herokuapp.com/icon?url=" + getdomainroot(url) + "&size=80..120..200";
 
 	//le DOM du block
-	var b = "<div class='block'><div class='l_icon_wrap'><button class='remove'><img src='src/images/x.png' /></button><a href='" + url + "'><img class='l_icon' src='" + bestIconUrl + "'></a></div><p>" + title + "</p></div>";
+	var b = "<div class='block_parent'><div class='block'><div class='l_icon_wrap'><button class='remove'><img src='src/images/x.png' /></button><a href='" + url + "'><img class='l_icon' src='" + bestIconUrl + "'></a></div><p>" + title + "</p></div></div>";
 
 	$(".linkblocks").append(b);
 }
@@ -135,15 +135,15 @@ function showRemoveLink() {
 
 	//utilise on pour le dom rajouté après le document.load
 	$(".linkblocks").on("mouseenter", ".block", function(e) {
-
+		
 		remTimeout = setTimeout(function() {
-
+			
 			var block = e.currentTarget;
 			$(block).find(".remove").addClass("visible");
 
 			canRemove = true;
 
-		}, 500);
+		}, 1000);
 	});
 
 	$(".linkblocks").on("mouseleave", ".block", function(e) {
@@ -168,7 +168,7 @@ function showRemoveLink() {
 		setTimeout(function() {
 			$(block).remove();
 		}, 200);
-		
+
 		
 		//coupe en 2 et concat sans le link a remove
 		function ejectIntruder(arr) {
@@ -186,7 +186,7 @@ function showRemoveLink() {
 	//prend l'index du parent du .remove clické
 	$(".linkblocks").on("click", ".remove", function() {
 		
-		var index = $(this).parent().parent().index();
+		var index = $(this).parent().parent().parent().index();
 		(canRemove ? removeblock(index) : "");
 	});
 }
@@ -215,24 +215,24 @@ function linkSubmission() {
 
 	$(".addlink input[name='title'").val("");
 	$(".addlink input[name='url'").val("");
-}
+};
 
 $('.addlink input[name="url"]').on('keypress', function(e) {
 
-		if(e.which === 13){
-			//disable
-			$(this).attr("disabled", "disabled");
+	if(e.which === 13){
+		//disable
+		$(this).attr("disabled", "disabled");
 
-			linkSubmission();
-			
-			//reenable
-			$(this).removeAttr("disabled");
-		}
-	});
+		linkSubmission()
+
+		//reenable
+		$(this).removeAttr("disabled")
+	}
+})
 
 $(".submitlink").click(function() {
-	linkSubmission();
-});
+	linkSubmission()
+})
 
 
 
@@ -395,23 +395,12 @@ function weather(changelang) {
 		city.blur();
 	}
 
-	
+
 	$(".submitw_city").click(function() {
-		updateWeatherCity();
+		updateWeatherCity()
 	});
 
-	$('.change_weather input[name="city"]').on('keypress', function(e) {
-
-		if(e.which === 13){
-			//disable
-			$(this).attr("disabled", "disabled");
-
-			updateWeatherCity();
-			
-			//reenable
-			$(this).removeAttr("disabled");
-		}
-	});
+	$('.change_weather')
 
 
 	//req la meteo avec metric et l'enregistre
@@ -446,10 +435,10 @@ function weather(changelang) {
 	}
 
 	//affiche la ville dans l'input de ville
-	$(".change_weather input[name='city']").attr("placeholder", localStorage.wCity);
+	$(".change_weather input[name='city']").val(localStorage.wCity);
 
 	//check imperial
-	if (u && u === "imperial") {
+	if (localStorage.wUnit === "imperial") {
 		$(".switch input").checked = true;
 	}
 }
@@ -481,8 +470,8 @@ function renderImage(file) {
 $(".change_background input[name='background_file']").change(function() {
 
 	renderImage(this.files[0]);
-	console.log(this.files);
-});
+	console.log(this.files)
+}); 
 
 
 
