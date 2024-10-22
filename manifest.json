@@ -1,16 +1,22 @@
 {
-"manifest_version": 2,
-"name": "Barev Startpage",
-"short_name": "Barev",
-"version": "1.0",
-"description": "Barev is a customizable startpage for the new tabs and windows of your browser. It's inspired by the looks of iOS and is meant to be both beautiful and practical.",
-"author": "Zaqar Hakobyan & Victor Azevedo and Tahoe Beetschen",
-"homepage_url": "https://github.com/codewithzaqar/Barev",
-"icons": {
-	"120": "favicon.png"
-  },
+	"manifest_version": 2,
+	"name": "Barev Startpage",
+	"short_name": "Barev",
+	"version": "1.0",
+	"description": "Barev is a customizable startpage for the new tabs and windows of your browser. It's inspired by the looks of iOS and is meant to be both beautiful and practical.",
+	"author": "Zaqar Hakobyan & Victor Azevedo and Tahoe Beetschen",
+	"homepage_url": "https://github.com/victorazevedo-me/Bonjourr",
 
-"chrome_url_overrides" : {
-	"newtab": "index.html"
-}
+	"icons": {
+	    "120": "favicon.png"
+  	},
+
+	"chrome_url_overrides" : {
+		"newtab": "index.html"
+	},
+
+	"permissions": [
+		"storage",
+		"unlimitedStorage"
+	]
 }
