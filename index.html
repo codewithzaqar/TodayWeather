@@ -92,14 +92,14 @@
 
 				<div class="blur">
 					<span class="span trn">Blur intensity</span>
-					<input type="text" name="background_blur" min="0" max="50" value="25" step="1">
+					<input type="range" name="background_blur" min="0" max="50" value="25" step="1">
 				</div>
 
 				<hr>
 
 				<div class="dark_mode_option">
 					<span class="span trn">Dark mode</span>
-					<select class="lang">
+					<select class="theme">
 						<option value="auto" class="trn">Only at night</option>
 						<option value="enable" class="trn">Enable</option>
 						<option value="disable" class="trn">Disable</option>
@@ -134,16 +134,16 @@
 			<div class="param">
 				<div class="activate_searchbar">
 					<span class="span trn">Activate</span>
-					<div>
-						<label class="switch">
-							<input type="checkbox">
-							<span class="slider round span"></span>
-						</label>
-					</div>
+						<div>
+							<label class="switch">
+								<input type="checkbox">
+								<span class="slider round span"></span>
+							</label>
+						</div>
 				</div>
 				<hr>
 				<div id="choose_searchengine">
-					<span class="span trn">Search engine</span>
+					<span class="span trn"Search engine</span>
 					<select class="lang">
 						<option value="auto" class="trn">Startpage</option>
 						<option value="enable" class="trn">DuckDuckGo</option>
@@ -154,13 +154,13 @@
 				</div>
 			</div>
 
-
-
-
+			
+			
+			
 
 		</div>
 
-
+		
 
 		<div class="lang_section">
 			<h5 class="subtitle trn">Language</h5>
@@ -230,10 +230,10 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div id="searchbar_section">
-			<form action="https://www.google.com/search" method="get" autocomplete="off">
-				<input class="searchbar" type="text" name="q" placeholder="Search">
+			<form action="https://www.google.com/search" method="GET" autocomplete="off">
+				<input class="searchbar" type="text" name="q" placeholder="Search"></input>
 			</form>
 		</div>
 

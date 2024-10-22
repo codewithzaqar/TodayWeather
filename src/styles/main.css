@@ -72,7 +72,7 @@ p, h3 {
 .greetings {
 	font-size: 3em;
 	font-weight: lighter;
-	padding-bottom: 0.3em;
+	/*padding-bottom: 0.3em;*/
 }
 
 .weather div {
@@ -98,6 +98,8 @@ div.w_widget_text {
 /* Searchbar section */
 
 #searchbar_section {
+	/*a enlever*/
+	display: none;
 	align-self: stretch;
 }
 
@@ -110,6 +112,7 @@ div.w_widget_text {
 	border-radius: 4px;
 	padding-left: 1em;
 }
+
 
 
 

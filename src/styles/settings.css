@@ -397,51 +397,62 @@ input:checked + .slider:before {
 
 
 
-/* Dark mode
-.settings {
+/*Dark mode*/
+
+body.dark .settings {
 	background-color: black;
 }
-hr {
+
+body.dark hr {
 	border-bottom: 1px solid #3f3f41;
 }
-.subtitle {
+
+body.dark .subtitle {
 	color: #929294;
 	font-family: sf_pro_displaylight;
 }
-.param {
+
+body.dark .param {
 	background-color : #1c1c1e;
 	color: white;
 	border-top: 1px solid #3f3f41;
 	border-bottom: 1px solid #3f3f41;
 }
-input[name="title"],
-input[name="url"],
-input[name="city"] {
+
+body.dark input[name="title"],
+body.dark input[name="url"],
+body.dark input[name="city"] {
 	background-color: #39383d;
 	color: white;
 }
-input[type="range"] {
+
+body.dark input[type="range"] {
 	background-color: #1c1c1e;
 }
-.title {
+
+body.dark .title {
 	background-color : #1c1c1e;
 	color: white;
 	border-top: 0;
 	border-bottom:0;
 }
-::-moz-range-thumb {
+
+body.dark ::-moz-range-thumb {
 	box-shadow:none;
 }
-::placeholder {
+
+body.dark ::placeholder {
 	color: #929294;
 }
-button {
+
+body.dark button {
 	background-color: #1c1c1e;
 }
-.slider {
+
+body.dark .slider {
 	background-color: #39383d;
 }
-.signature {
+
+body.dark .signature {
 	color: #929294;
 }
-*/
